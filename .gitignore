@@ -1,0 +1,5 @@
+#File with sensitive information
+.env
+
+#Default file created with OPENVPN
+openvpn
