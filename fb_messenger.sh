@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #We load the variables
-source ".env"; 
+source "/home/$(whoami)/Documents/bash_scripts/.env";
 
 API_KEY="$FB_KEY" #Para generar un nuevo API_KEY Accede a: https://www.nimrod-messenger.io/
 while getopts "u:m:a:h" opt; do
@@ -28,18 +28,31 @@ if [ -z "${URL}" ] && [ -z "${MESSAGE}" ]; then
 	echo "Usage: fb_messenger {(-m <message> | -u <URL>) [-a KEY] }"
 	exit 0;
 else
-	RES=$(
-			curl -s -X POST -H "Content-Type: application/json" -d '{ 
-				"api_key": "'"${API_KEY}"'",
-				"message": "'"${MESSAGE}"'",
-				"url": "'"${URL}"'"
-			}' "https://www.nimrod-messenger.io/api/v1/message"
-		)
+	CONTENT='{"api_key": "'${API_KEY}'"';
+	IMAGE_URL="https://www.nimrod-messenger.io/api/v1/image";
+	MESSAGE_URL="https://www.nimrod-messenger.io/api/v1/message";
+
+	# If the parameters have a Message we use the message URL
+	[ ! -z "${MESSAGE}" ] && {
+		CONTENT=''"$CONTENT"', "message": "'${MESSAGE}'"';
+		NIMROD_URL=$MESSAGE_URL;
+	}
+
+	# If the parameters have a URL we use the image URL
+	[ ! -z "${URL}" ] && { 
+		CONTENT=''"$CONTENT"', "url": "'${URL}'"';
+		NIMROD_URL=$IMAGE_URL;
+	}
+
+	CONTENT=''"$CONTENT"'}'
+	echo $CONTENT;
+	RES=$(curl -s -X POST -H "Content-Type: application/json" -d "$CONTENT" "$NIMROD_URL")
+ 
 	if [ "$RES" == "OK" ]; then
 		echo "Message Sent"
 		exit 0;
 	else
-		echo "Error while sending message: ${RES}"
+		echo "Error while sending message: $RES"
 		exit 1;
 	fi
 fi

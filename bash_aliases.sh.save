@@ -1,8 +1,7 @@
-#!/bin/bash
+x#!/bin/bash
+#########################################################tants						#
 #########################################################
-#		Constants				#
-#########################################################
-source $HOME/Documents/bash_scripts/.env; #Path to your constants
+source '.env'; #Path to your constants
 DO_HOST=$DO_HOST;#ENV Constant: Stores DigitalOcean Host
 DO_USER=$DO_USER;#ENV Constant: Stores DigitalOcean User
 BOLD_FONT=$BOLD_FONT;#ENV Constant: Stores UNICODE for 
@@ -11,22 +10,16 @@ NORMAL_FONT=$NORMAL_FONT;#ENV Constant: Stores UNICODE
 	#for normal text (To be used in terminal text styling)
 
 #########################################################
-#			Paths				#
+#						Paths							#
 #########################################################
-export FLUTTER=$HOME/Public/flutter/bin;
-export ANDROID_DIR=$HOME/Android/Sdk;
-export DART=/usr/lib/dart/bin;
-PATH=$PATH:$HOME/.pub-cache/bin;
-PATH=$PATH:$DART;
-PATH=$PATH:$FLUTTER;
-PATH=$PATH:$ANDROID_DIR/emulator;
-PATH=$PATH:$ANDROID_DIR/platform-tools/;
-PATH=$PATH:$HOME/Documents/bash/;
+PATH=$PATH:/home/$(whoami)/Android/Sdk/emulator;
+PATH=$PATH:/home/$(whoami)/Android/Sdk/platform-tools/;
+PATH=$PATH:/home/$(whoami)/Documents/bash/;
 PATH=$PATH:/opt/mssql-tools/bin;
-export PATH=$PATH:$HOME/Downloads/vimcat;
+PATH=$PATH:/home/$(whoami)/Downloads/vimcat;
 
 #########################################################
-#			Aliases				#
+#						Aliases							#
 #########################################################
 alias c='clear';
 alias ..='cd ..';
@@ -69,7 +62,7 @@ alias lessss="pygmentize -g -O style=colorful,linenos=1";
 alias lesss="pygmentize -g -O style=colorful";
 
 #########################################################
-#			Functions			#
+#						Functions						#
 #########################################################
 #Update full system
 update () {
