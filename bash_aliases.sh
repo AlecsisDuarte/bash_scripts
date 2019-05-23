@@ -5,25 +5,33 @@
 source $HOME/Documents/bash_scripts/.env; #Path to your constants
 DO_HOST=$DO_HOST;#ENV Constant: Stores DigitalOcean Host
 DO_USER=$DO_USER;#ENV Constant: Stores DigitalOcean User
-BOLD_FONT=$BOLD_FONT;#ENV Constant: Stores UNICODE for 
-	#bold text (To be used in terminal text styling)
-NORMAL_FONT=$NORMAL_FONT;#ENV Constant: Stores UNICODE 
-	#for normal text (To be used in terminal text styling)
+BOLD_FONT=$BOLD_FONT;#Stores UNICODE for bold text (To be used in terminal text styling)
+NORMAL_FONT=$NORMAL_FONT;# Stores UNICODE for normal text (To be used in terminal text styling)
 
 #########################################################
 #			Paths				#
 #########################################################
+export SDKMAN=$HOME/.sdkman/bin;
+export BFG=$HOME/Public/BFG;
 export FLUTTER=$HOME/Public/flutter/bin;
 export ANDROID_DIR=$HOME/Android/Sdk;
 export DART=/usr/lib/dart/bin;
+export NPM_CONFIG_PREFIX=~/.npm-global
+export FB_MESSAGE=$HOME/Documents/bash_scripts;
+export VIMCAT=$HOME/Downloads/vimcat;
+
+PATH=$PATH:$FB_MESSAGE;
+PATH=$PATH:$SDKMAN;
 PATH=$PATH:$HOME/.pub-cache/bin;
 PATH=$PATH:$DART;
 PATH=$PATH:$FLUTTER;
+PATH=$PATH:$BFG;
 PATH=$PATH:$ANDROID_DIR/emulator;
 PATH=$PATH:$ANDROID_DIR/platform-tools/;
+PATH=$PATH:$ANDROID_DIR/tools/bin/;
 PATH=$PATH:$HOME/Documents/bash/;
 PATH=$PATH:/opt/mssql-tools/bin;
-export PATH=$PATH:$HOME/Downloads/vimcat;
+PATH=$PATH:$VIMCAT;
 
 #########################################################
 #			Aliases				#
@@ -68,6 +76,9 @@ alias mysql-do="mysql -u$DO_USER -h$DO_HOST -p";
 alias lessss="pygmentize -g -O style=colorful,linenos=1";
 alias lesss="pygmentize -g -O style=colorful";
 
+## Wake On Lan ##
+alias wake_gamingpc="wakeonlan $GAMING_PC_MAC"
+
 #########################################################
 #			Functions			#
 #########################################################
@@ -82,13 +93,16 @@ update () {
 	echo "-----------------------------------";
 	return;
 }
-	
+
 #Restarts the trackpad/mouse
 pad_restart(){
 	echo "Restarting the touchpad...";
 	sudo modprobe -r psmouse;
 	sudo modprobe psmouse;
 	echo "Touchpad restarted!";
+	sleep 1.5
+	libinput-gestures-setup restart > /dev/null;
+	echo "Gestures restarted";
 }
 
 #Makes a full system clean up
@@ -100,24 +114,24 @@ clean_system(){
 	echo "---------------------------------------------------------";
 	echo -e "${bold}-Deleting leftover data from apps.${normal}\033[2m";
 		sudo apt autoremove -qq;
-	echo -e "\033[0m";
+	echo -e $NORMAL_FONT;
 	echo "${bold}-Cleaning thumbnail cache.${normal}";
-		echo -e "\033[5mPrevious ammount of cache:\033[0m\033[2m";
+		echo -e "\033[5mPrevious ammount of cache:${NORMAL_FONT}\033[2m";
 		du -sh ~/.cache/thumbnails;
-		echo -e "\033[0m";
+		echo -e $NORMAL_FONT;
 		sudo rm -rf ~/.cache/thumbnails/*;
-		echo -e "\033[5mCurrent ammount:\033[0m\033[2m";
+		echo -e "\033[5mCurrent ammount:${NORMAL_FONT}\033[2m";
 		du -sh ~/.cache/thumbnails;
-		echo -e "\033[0m";
+		echo -e $NORMAL_FONT;
 
 	echo "${bold}-Removing APT cache.${normal}";
-		echo -e "\033[5mPrevious ammount of cache:\033[0m\033[2m";
+		echo -e "\033[5mPrevious ammount of cache:${NORMAL_FONT}\033[2m";
 		sudo du -sh /var/cache/apt;
-		echo -e "\033[0m";
+		echo -e $NORMAL_FONT;
 		sudo apt clean;
-		echo -e "\033[5mCurrent ammount:\033[0m\033[2m";
+		echo -e "\033[5mCurrent ammount:${NORMAL_FONT}\033[2m";
 		sudo du -sh /var/cache/apt;
-		echo -e "\033[0m";
+		echo -e $NORMAL_FONT;
 	echo "---------------------------------------------------------";
 	echo "--------------Finished cleaning (as new)-----------------";
 	echo "---------------------------------------------------------";
@@ -130,15 +144,6 @@ audio_restart() {
 	pulseaudio --start
 	echo "Finished! Enjoy your audio";
 }
-
-java_run(){
-	fileName=$(echo $1| cut -d'.' -f 1)
-	echo "Compiling $1..."
-	javac -verbose $1
-	echo "Running $fileName..."
-	java $fileName	
-}
-
 
 openvpn_control() {
 	OPENVPN_SCRIPT_ROUTE="/home/$(whoami)/Documents/bash/openvpn"
