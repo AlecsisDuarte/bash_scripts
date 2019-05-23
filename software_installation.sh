@@ -12,9 +12,9 @@ sudo apt -y install fonts-powerline
 #Power Management
 sudo add-apt-repository -y ppa:linrunner/tlp
 sudo apt update
-sudo apt install tlp tlp-rdw
+sudo apt install -y tlp tlp-rdw
 sudo tlp start
 
 sudo add-apt-repository -y ppa:ubuntuhandbook1/apps
 sudo apt update
-sudo apt install laptop-mode-tools
+sudo apt install -y laptop-mode-tools
