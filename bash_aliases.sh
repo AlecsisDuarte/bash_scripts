@@ -1,6 +1,6 @@
 #!/bin/bash
 #########################################################
-#		Constants				#
+#						Constants						#
 #########################################################
 source $HOME/Documents/bash_scripts/.env; #Path to your constants
 DO_HOST=$DO_HOST;#ENV Constant: Stores DigitalOcean Host
@@ -9,8 +9,10 @@ BOLD_FONT=$BOLD_FONT;#Stores UNICODE for bold text (To be used in terminal text 
 NORMAL_FONT=$NORMAL_FONT;# Stores UNICODE for normal text (To be used in terminal text styling)
 
 #########################################################
-#			Paths				#
+#						Paths							#
 #########################################################
+export LOCAL_BIN=$HOME/.local/bin;
+export FLUTTER_HOME=/opt/flutter;
 export SDKMAN=$HOME/.sdkman/bin;
 export BFG=$HOME/Public/BFG;
 export FLUTTER=$HOME/Public/flutter/bin;
@@ -21,6 +23,7 @@ export FB_MESSAGE=$HOME/Documents/bash_scripts;
 export VIMCAT=$HOME/Downloads/vimcat;
 
 PATH=$PATH:$FB_MESSAGE;
+PATH=$PATH:$LOCAL_BIN;
 PATH=$PATH:$SDKMAN;
 PATH=$PATH:$HOME/.pub-cache/bin;
 PATH=$PATH:$DART;
@@ -32,9 +35,10 @@ PATH=$PATH:$ANDROID_DIR/tools/bin/;
 PATH=$PATH:$HOME/Documents/bash/;
 PATH=$PATH:/opt/mssql-tools/bin;
 PATH=$PATH:$VIMCAT;
+PATH=$PATH:$FLUTTER_HOME/bin;
 
 #########################################################
-#			Aliases				#
+#						Aliases							#
 #########################################################
 alias c='clear';
 alias ..='cd ..';
@@ -80,7 +84,7 @@ alias lesss="pygmentize -g -O style=colorful";
 alias wake_gamingpc="wakeonlan $GAMING_PC_MAC"
 
 #########################################################
-#			Functions			#
+#						Functions						#
 #########################################################
 #Update full system
 update () {
