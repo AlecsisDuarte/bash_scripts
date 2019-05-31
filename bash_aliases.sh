@@ -12,6 +12,7 @@ NORMAL_FONT=$NORMAL_FONT;# Stores UNICODE for normal text (To be used in termina
 #						Paths							#
 #########################################################
 export LOCAL_BIN=$HOME/.local/bin;
+export GOLANG_HOME=/opt/go;
 export FLUTTER_HOME=/opt/flutter;
 export SDKMAN=$HOME/.sdkman/bin;
 export BFG=$HOME/Public/BFG;
@@ -36,7 +37,7 @@ PATH=$PATH:$HOME/Documents/bash/;
 PATH=$PATH:/opt/mssql-tools/bin;
 PATH=$PATH:$VIMCAT;
 PATH=$PATH:$FLUTTER_HOME/bin;
-
+PATH=$PATH:$GOLANG_HOME/bin;
 #########################################################
 #						Aliases							#
 #########################################################
