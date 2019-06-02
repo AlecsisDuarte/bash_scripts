@@ -105,9 +105,9 @@ pad_restart(){
 	sudo modprobe -r psmouse;
 	sudo modprobe psmouse;
 	echo "Touchpad restarted!";
-	sleep 1.5
-	libinput-gestures-setup restart > /dev/null;
-	echo "Gestures restarted";
+#	sleep 1.5
+#	libinput-gestures-setup restart > /dev/null;
+#	echo "Gestures restarted";
 }
 
 #Makes a full system clean up
