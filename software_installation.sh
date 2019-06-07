@@ -13,7 +13,7 @@ sudo apt install -y git neofetch p7zip-full p7zip-rar \
 	python-pip unzip libglu1-mesa default-jdk \
 	openjdk-8-jdk openjdk-13-jdk cpu-checker \
 	qemu-kvm bridge-utils ruby ruby-all-dev \
-	lib32stdc++6 htop
+	lib32stdc++6 htop gcc g++ make
 
 
 #Terminal

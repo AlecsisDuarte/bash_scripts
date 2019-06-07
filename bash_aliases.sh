@@ -19,7 +19,6 @@ export BFG=$HOME/Public/BFG;
 export FLUTTER=$HOME/Public/flutter/bin;
 export ANDROID_DIR=$HOME/Android/Sdk;
 export DART=/usr/lib/dart/bin;
-export NPM_CONFIG_PREFIX=~/.npm-global
 export FB_MESSAGE=$HOME/Documents/bash_scripts;
 export VIMCAT=$HOME/Downloads/vimcat;
 
