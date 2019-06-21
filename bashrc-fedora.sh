@@ -3,6 +3,7 @@
 export SNAP_HOME=/var/lib/snapd/snap/;
 export LOCAL_HOME=$HOME/.local;
 export FLUTTER_HOME=/opt/flutter/;
+export ENABLE_FLUTTER_DESKTOP=true;
 
 #Paths
 PATH=$PATH:$SNAP_HOME/bin;
