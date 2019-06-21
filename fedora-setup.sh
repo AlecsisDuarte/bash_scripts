@@ -59,7 +59,8 @@ sudo dnf install --assumeyes git \
 	ruby gcc make g++ \
 	ruby-devel \
 	java-11-openjdk.x86_64 \
-	redhat-rpm-config
+	redhat-rpm-config \
+	libstdc++.i686
 
 echo " - Browser"
 sudo dnf install --assumeyes chromium \
