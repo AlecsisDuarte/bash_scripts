@@ -63,6 +63,9 @@ sudo dnf install --assumeyes git \
 	libstdc++.i686 \
 	clang
 
+#Java enviroment manager
+git clone https://github.com/gcuisinier/jenv.git ~/.jenv
+
 echo " - Browser"
 sudo dnf install --assumeyes chromium \
 	chrome-gnome-shell
