@@ -16,7 +16,7 @@ export GOLANG_HOME=/opt/go;
 export FLUTTER_HOME=/opt/flutter;
 export SDKMAN=$HOME/.sdkman/bin;
 export BFG=$HOME/Public/BFG;
-export FLUTTER=$HOME/Public/flutter/bin;
+export FLUTTER=/opt/flutter/bin;
 export ANDROID_DIR=$HOME/Android/Sdk;
 export DART=/usr/lib/dart/bin;
 export FB_MESSAGE=$HOME/Documents/bash_scripts;
@@ -37,6 +37,15 @@ PATH=$PATH:/opt/mssql-tools/bin;
 PATH=$PATH:$VIMCAT;
 PATH=$PATH:$FLUTTER_HOME/bin;
 PATH=$PATH:$GOLANG_HOME/bin;
+
+#We initialize POWERLINE-DAEMON if exists
+if [ -x "$(command -v powerline-daemon)" ]; then
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	. $HOME/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
 #########################################################
 #						Aliases							#
 #########################################################
@@ -57,15 +66,15 @@ alias restart-wifi="sudo service network-manager restart";
 
 ## pass options to free ##
 alias meminfo='free -m -l -t';
- 
+
 ## get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4';
 alias psmem10='ps auxf | sort -nr -k 4 | head -10';
- 
+
 ## get top process eating cpu ##
 alias pscpu='ps auxf | sort -nr -k 3';
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10';
- 
+
 ## Get server cpu info ##
 alias cpuinfo='lscpu';
  
@@ -82,6 +91,12 @@ alias lesss="pygmentize -g -O style=colorful";
 
 ## Wake On Lan ##
 alias wake_gamingpc="wakeonlan $GAMING_PC_MAC"
+
+## Colorls ##
+if [ -x "$(command -v colorls)" ]; then
+	alias lc='colorls --sd'
+	alias lcgit='colorls --gs --tree=3'
+fi
 
 #########################################################
 #						Functions						#
@@ -166,4 +181,15 @@ openvpn_control() {
 			*)
 				echo $"Usage: openvpn_control {start|stop|status}"
 		esac
+}
+
+change_java_version() {
+	echo "Changing java"
+	sudo update-alternatives --config java
+	echo "Changing javac"
+	sudo update-alternatives --config javac
+	echo "New Java version"
+	java -version
+	echo "New Javac version"
+	javac -version
 }
